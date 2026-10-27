@@ -1,0 +1,16 @@
+[
+  {
+    "id": "task_v1_001",
+    "title": "Thiết kế kiến trúc hệ thống V1 (Monolith Local)",
+    "completed": true,
+    "createdAt": "2026-10-27T08:00:00.000Z",
+    "updatedAt": "2026-10-27T08:05:00.000Z"
+  },
+  {
+    "id": "task_v1_002",
+    "title": "Chuẩn bị kịch bản kiểm thử đa thiết bị V2",
+    "completed": false,
+    "createdAt": "2026-10-27T08:10:00.000Z",
+    "updatedAt": "2026-10-27T08:10:00.000Z"
+  }
+]

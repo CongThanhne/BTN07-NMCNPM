@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Runtime generated databases & test caches
+data/tasks.db
+data/*.tmp
+data_test/
+*.log
+
+# File đề bài & tài nguyên tải trang từ trình duyệt (tránh rác repo)
+Bài tập tuần 6_ Tiến hóa kiến trúc ứng dụng quản lý công việc.html
+Bài tập tuần 6_ Tiến hóa kiến trúc ứng dụng quản lý công việc_files/
+style.md
+
+# OS / Editor junk files
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/

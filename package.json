@@ -1,0 +1,13 @@
+{
+  "name": "task-architecture-evolution",
+  "version": "1.0.0",
+  "description": "Tiến hóa kiến trúc ứng dụng quản lý công việc từ V1 đến V4 (Monolith, Client-Server, N-Layer/MVC, P2P)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test:verify": "node test-verification.js"
+  },
+  "keywords": ["architecture", "client-server", "n-layer", "mvc", "sqlite", "p2p", "webrtc"],
+  "author": "Software Engineering Team",
+  "license": "MIT"
+}

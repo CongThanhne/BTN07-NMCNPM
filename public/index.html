@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tiến Hóa Kiến Trúc Ứng Dụng Quản Lý Công Việc (V1 - V4)</title>
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="app-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="brand-badge">SE</div>
+        <div>
+          <h1>Tiến Hóa Kiến Trúc Phần Mềm</h1>
+          <p>Ứng dụng Quản lý Công việc xuyên suốt V1 &rarr; V4</p>
+        </div>
+      </div>
+
+      <!-- Version Bar -->
+      <nav class="version-bar" aria-label="Kiến trúc phiên bản">
+        <button class="ver-btn" data-ver="v1">V1: Cục bộ (JSON)</button>
+        <button class="ver-btn" data-ver="v2">V2: Client–Server</button>
+        <button class="ver-btn active" data-ver="v3">V3: N-Layer / Kanban</button>
+        <button class="ver-btn" data-ver="v3.5">V3.5: Multi-user</button>
+        <button class="ver-btn" data-ver="v4">V4: P2P Cộng tác</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" style="margin-top: 24px;">
+    <!-- Architecture Explanation Callout -->
+    <div class="callout" id="version-explanation">
+      <strong>V3: N-Layer & MVC/MVVM</strong>: Thay giao diện sang Kanban 2 cột. Thay nguồn lưu trữ sang SQLite với bước Data Migration an toàn.
+    </div>
+
+    <!-- Status & Architecture Control Bar -->
+    <section class="status-banner" aria-label="Trạng thái hệ thống">
+      <div class="status-info">
+        <span class="badge badge-sage" id="status-connection">🟢 Server Online</span>
+        <span class="badge badge-sage" id="status-storage">Storage: SQLITE</span>
+        <span class="badge badge-caramel" id="status-p2p">⚪ P2P Chưa Kết Nối</span>
+      </div>
+
+      <div class="status-actions">
+        <button class="btn-secondary" id="btn-use-json" title="Chuyển sang JSON File">Dùng JSON</button>
+        <button class="btn-secondary" id="btn-use-sqlite" title="Chuyển sang SQLite">Dùng SQLite</button>
+        <button class="btn-secondary" id="btn-migrate" title="Chuyển dữ liệu từ JSON sang SQLite">🔄 Migrate Dữ Liệu</button>
+      </div>
+    </section>
+
+    <!-- V4 P2P WebRTC Panel -->
+    <section class="p2p-panel" id="p2p-panel" style="display: none;" aria-label="Điều khiển kết nối ngang hàng P2P">
+      <div class="p2p-panel-header">
+        <div>
+          <h4>Kênh Kết Nối Ngang Hàng P2P (WebRTC DataChannel)</h4>
+          <p style="font-size: 0.85rem; color: var(--ink-soft); margin-top: 2px;">
+            Mã định danh của bạn: <strong id="my-peer-id" style="color: var(--coffee-dark);">Peer_...</strong>
+          </p>
+        </div>
+        <div class="p2p-controls">
+          <button class="btn-secondary" id="btn-p2p-listen">1. Chờ Kết Nối (Listen)</button>
+          <input type="text" class="p2p-input" id="target-peer-input" placeholder="Mã Peer đối tác..." />
+          <button class="btn-primary" id="btn-p2p-connect" style="padding: 8px 14px; font-size: 0.85rem;">2. Kết Nối Ngay</button>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px;">
+        <span style="font-size: 0.8rem; color: var(--ink-soft); align-self: center;">Nếu server đã tắt:</span>
+        <button class="btn-secondary" id="btn-manual-offer" style="font-size: 0.75rem;">Tạo SDP Offer thủ công</button>
+        <button class="btn-secondary" id="btn-manual-answer" style="font-size: 0.75rem;">Nhận Offer & Tạo Answer</button>
+        <button class="btn-secondary" id="btn-apply-answer" style="font-size: 0.75rem;">Áp dụng Answer</button>
+      </div>
+
+      <div class="p2p-logs" id="p2p-logs">
+        <div>[Hệ thống P2P] Sẵn sàng thiết lập kênh truyền trực tiếp không qua server...</div>
+      </div>
+    </section>
+
+    <!-- Main Workspace Card -->
+    <div class="card">
+      <!-- V3.5 Multi-user Switcher & Filter -->
+      <div class="user-switch-bar" id="user-switch-bar" style="display: none;">
+        <span style="font-size: 0.88rem; font-weight: 600; color: var(--coffee-dark);">Tôi là:</span>
+        <select class="user-select" id="current-user-select">
+          <option value="Alice">👤 Alice (Thành viên A)</option>
+          <option value="Bob">👤 Bob (Thành viên B)</option>
+          <option value="Charlie">👤 Charlie (Thành viên C)</option>
+        </select>
+
+        <span style="margin-left: 14px; font-size: 0.88rem; font-weight: 600; color: var(--coffee-dark);">Lọc công việc:</span>
+        <select class="user-select" id="filter-user-select">
+          <option value="ALL">👥 Tất cả mọi người</option>
+          <option value="MY">🎯 Chỉ của tôi</option>
+        </select>
+      </div>
+
+      <!-- Add Task Form -->
+      <form class="task-form" id="add-task-form">
+        <input 
+          type="text" 
+          class="task-input" 
+          id="task-input" 
+          placeholder="Nhập tên công việc cần làm..." 
+          required 
+          autocomplete="off"
+        />
+        <select class="user-select" id="assign-to-select" style="display: none; max-width: 140px;">
+          <option value="Alice">Gán: 👤 Alice</option>
+          <option value="Bob">Gán: 👤 Bob</option>
+          <option value="Charlie">Gán: 👤 Charlie</option>
+          <option value="Chung">Gán: 👥 Chung</option>
+        </select>
+        <button type="submit" class="btn-primary">+ Thêm công việc</button>
+      </form>
+
+      <!-- Dynamic Views Container (ListView for V1/V2 or KanbanView for V3/V4) -->
+      <section id="tasks-container" aria-live="polite">
+        <!-- Injected dynamically by JS -->
+      </section>
+    </div>
+  </main>
+
+  <!-- Load Scripts in Clean Architecture Order -->
+  <script src="js/TaskModel.js"></script>
+  <script src="js/ApiStorage.js"></script>
+  <script src="js/P2PPeerManager.js"></script>
+  <script src="js/ListView.js"></script>
+  <script src="js/KanbanView.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

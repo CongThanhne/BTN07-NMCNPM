@@ -1,0 +1,554 @@
+:root {
+  --paper: #fbf7ef;
+  --paper-strong: #fffdf8;
+  --surface: #f2e8da;
+  --surface-deep: #e8dac7;
+  --ink: #302821;
+  --ink-soft: #695b4f;
+  --coffee: #70472f;
+  --coffee-dark: #40281d;
+  --caramel: #c6813e;
+  --sage: #68765d;
+  --sage-soft: #e1e7db;
+  --rose: #a24b3d;
+  --rose-soft: #f3dfd9;
+  --line: #d9caba;
+  --shadow: 0 14px 36px rgba(64, 40, 29, 0.08);
+  --radius: 14px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  color: var(--ink);
+  background: radial-gradient(circle at 10% 0%, rgba(198, 129, 62, 0.08), transparent 30rem),
+              linear-gradient(180deg, #f5ede2, var(--paper) 36rem);
+  min-height: 100vh;
+  padding-bottom: 60px;
+  line-height: 1.6;
+}
+
+.container {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+/* Header */
+.app-header {
+  background: rgba(255, 253, 248, 0.94);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+  padding: 16px 0;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: 0 4px 16px rgba(64, 40, 29, 0.04);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-badge {
+  background: var(--coffee-dark);
+  color: #fffaf3;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-family: "Times New Roman", serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.brand h1 {
+  font-family: "Times New Roman", serif;
+  font-size: 1.4rem;
+  color: var(--coffee-dark);
+  line-height: 1.2;
+}
+
+.brand p {
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+
+/* Version Control Bar */
+.version-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  padding: 6px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+}
+
+.ver-btn {
+  background: transparent;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ver-btn:hover {
+  color: var(--coffee-dark);
+}
+
+.ver-btn.active {
+  background: var(--coffee-dark);
+  color: #fffaf3;
+  box-shadow: 0 2px 6px rgba(64, 40, 29, 0.2);
+}
+
+/* Status Banner */
+.status-banner {
+  background: var(--paper-strong);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 14px 20px;
+  margin: 24px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  box-shadow: var(--shadow);
+}
+
+.status-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+}
+
+.badge-sage {
+  background: var(--sage-soft);
+  color: var(--sage);
+  border-color: #c7d1bd;
+}
+
+.badge-caramel {
+  background: #fbf0e3;
+  color: var(--caramel);
+  border-color: #ecc79d;
+}
+
+.badge-rose {
+  background: var(--rose-soft);
+  color: var(--rose);
+  border-color: #e4bfb5;
+}
+
+.status-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-secondary {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-secondary:hover {
+  background: var(--surface-deep);
+}
+
+/* Card Container */
+.card {
+  background: var(--paper-strong);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  margin-bottom: 24px;
+}
+
+/* Add Task Form */
+.task-form {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.task-input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: 0.95rem;
+  background: var(--paper);
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.task-input:focus {
+  border-color: var(--caramel);
+}
+
+.btn-primary {
+  background: var(--coffee);
+  color: #fffaf3;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.btn-primary:hover {
+  background: var(--coffee-dark);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+/* V1/V2 Simple List Style */
+.task-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  background: var(--paper-strong);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.task-item:hover {
+  border-color: var(--caramel);
+  box-shadow: 0 4px 12px rgba(64, 40, 29, 0.05);
+}
+
+.task-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1;
+}
+
+.task-checkbox {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--coffee);
+  cursor: pointer;
+}
+
+.task-title {
+  font-size: 0.98rem;
+  color: var(--ink);
+}
+
+.task-item.completed .task-title {
+  text-decoration: line-through;
+  color: var(--ink-soft);
+}
+
+.task-time {
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+}
+
+.btn-delete {
+  background: transparent;
+  border: none;
+  color: var(--rose);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  line-height: 1;
+  transition: background 0.2s;
+}
+
+.btn-delete:hover {
+  background: var(--rose-soft);
+}
+
+/* V3 Kanban Board Style */
+.kanban-board {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.kanban-col {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.kanban-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--line);
+}
+
+.kanban-header h3 {
+  font-family: "Times New Roman", serif;
+  font-size: 1.1rem;
+  color: var(--coffee-dark);
+}
+
+.kanban-count {
+  background: var(--paper-strong);
+  color: var(--coffee);
+  font-weight: 700;
+  font-size: 0.8rem;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+}
+
+.kanban-items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 180px;
+}
+
+.kanban-card {
+  background: var(--paper-strong);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 14px 16px;
+  box-shadow: 0 2px 6px rgba(64, 40, 29, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.kanban-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(64, 40, 29, 0.08);
+}
+
+.kanban-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.kanban-card-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.4;
+}
+
+.kanban-card.completed .kanban-card-title {
+  color: var(--ink-soft);
+  text-decoration: line-through;
+}
+
+.kanban-card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 6px;
+  font-size: 0.76rem;
+  color: var(--ink-soft);
+}
+
+.btn-move {
+  background: var(--surface-deep);
+  border: 1px solid var(--line);
+  color: var(--coffee-dark);
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-move:hover {
+  background: var(--caramel);
+  color: #fffaf3;
+}
+
+/* V4 P2P Control Panel */
+.p2p-panel {
+  background: var(--paper-strong);
+  border: 2px dashed var(--caramel);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.p2p-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.p2p-panel h4 {
+  font-family: "Times New Roman", serif;
+  font-size: 1.1rem;
+  color: var(--coffee-dark);
+}
+
+.p2p-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.p2p-input {
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  background: var(--paper);
+}
+
+.p2p-logs {
+  background: #2a221b;
+  color: #eedecf;
+  font-family: Consolas, monospace;
+  font-size: 0.8rem;
+  padding: 12px;
+  border-radius: 8px;
+  max-height: 120px;
+  overflow-y: auto;
+  margin-top: 10px;
+  line-height: 1.5;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--ink-soft);
+  font-style: italic;
+  font-size: 0.95rem;
+}
+
+/* Architecture Callout Note */
+.callout {
+  background: var(--surface);
+  border-left: 4px solid var(--caramel);
+  padding: 14px 18px;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+}
+
+.callout strong {
+  color: var(--coffee-dark);
+}
+
+/* V3.5 Multi-user styling */
+.badge-user {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--surface-deep);
+  color: var(--coffee-dark);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+}
+
+.user-switch-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  background: var(--paper-strong);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(64, 40, 29, 0.04);
+}
+
+.user-select {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  font-size: 0.88rem;
+  color: var(--coffee-dark);
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+}
+
+.user-select:focus {
+  border-color: var(--caramel);
+}
+
+@media (max-width: 768px) {
+  .kanban-board {
+    grid-template-columns: 1fr;
+  }
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
